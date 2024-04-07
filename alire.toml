@@ -1,0 +1,17 @@
+name = "a0b_time"
+description = "A0B Monotonic Time and Calendrical Calculations"
+version = "0.1.0"
+
+authors = ["Vadim Godunko"]
+maintainers = ["Vadim Godunko <vgodunko@gmail.com>"]
+maintainers-logins = ["godunko"]
+licenses = "Apache-2.0 WITH LLVM-exception"
+tags = ["embedded"]
+
+project-files = ["gnat/a0b_time.gpr"]
+
+[configuration]
+disabled = true
+
+[[depends-on]]
+a0b_base = ">=0.3.0"
