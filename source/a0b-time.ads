@@ -8,10 +8,10 @@
 
 pragma Restrictions (No_Elaboration_Code);
 
-private with A0B.Types;
+with A0B.Types;
 
 package A0B.Time
-  with Preelaborate
+  with Pure
 is
 
    type Duration is delta 0.000_000_001 digits 18;
@@ -22,21 +22,25 @@ is
 
    function "+"
      (Left : Monotonic_Time; Right : Time_Span) return Monotonic_Time
-        with Inline;
+        with Inline_Always;
    function "+"
      (Left : Time_Span; Right : Monotonic_Time) return Monotonic_Time
-        with Inline;
+        with Inline_Always;
    function "-"
      (Left : Monotonic_Time; Right : Time_Span) return Monotonic_Time
-        with Inline;
+        with Inline_Always;
    function "-"
      (Left : Monotonic_Time; Right : Monotonic_Time) return Time_Span
-        with Inline;
+        with Inline_Always;
 
-   --   function "<" (Left, Right : Time) return Boolean;
-   --   function "<="(Left, Right : Time) return Boolean;
-   --   function ">" (Left, Right : Time) return Boolean;
-   --   function ">="(Left, Right : Time) return Boolean;
+   function "<" (Left, Right : Monotonic_Time) return Boolean
+     with Inline_Always;
+   function "<=" (Left, Right : Monotonic_Time) return Boolean
+     with Inline_Always;
+   function ">" (Left, Right : Monotonic_Time) return Boolean
+     with Inline_Always;
+   function ">=" (Left, Right : Monotonic_Time) return Boolean
+     with Inline_Always;
 
    --   function "+" (Left, Right : Time_Span) return Time_Span;
    --   function "-" (Left, Right : Time_Span) return Time_Span;
@@ -75,7 +79,14 @@ is
    --   TS : out Time_Span);
    --   function Time_Of(SC : Seconds_Count; TS : Time_Span) return Time;
 
+   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Integer_64
+     with Inline_Always;
+   function To_Monotonic_Time (NS : A0B.Types.Integer_64) return Monotonic_Time
+     with Inline_Always;
+
 private
+
+   --  Monotonic_Time and Time_Span is a number of nanoseconds.
 
    type Monotonic_Time is new A0B.Types.Integer_64;
 

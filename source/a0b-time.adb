@@ -6,8 +6,6 @@
 
 pragma Restrictions (No_Elaboration_Code);
 
---  with Ada.Unchecked_Conversion;
-
 package body A0B.Time is
 
    use type A0B.Types.Integer_64;
@@ -19,9 +17,6 @@ package body A0B.Time is
    Second_Ticks      : constant := 1_000_000_000;
    Minute_Ticks      : constant := 60_000_000_000;
    Hour_Ticks        : constant := 3_600_000_000_000;
-
-  --   function U64 is
-  --     new Ada.Unchecked_Conversion (Monotonic_Time, A0B.Types.Unsigned_64);
 
    ---------
    -- "+" --
@@ -70,6 +65,42 @@ package body A0B.Time is
         Time_Span
           (A0B.Types.Integer_64 (Left) - A0B.Types.Integer_64 (Right));
    end "-";
+
+   ---------
+   -- "<" --
+   ---------
+
+   overriding function "<" (Left, Right : Monotonic_Time) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) < A0B.Types.Integer_64 (Right);
+   end "<";
+
+   ----------
+   -- "<=" --
+   ----------
+
+   overriding function "<=" (Left, Right : Monotonic_Time) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) <= A0B.Types.Integer_64 (Right);
+   end "<=";
+
+   ---------
+   -- ">" --
+   ---------
+
+   overriding function ">" (Left, Right : Monotonic_Time) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) > A0B.Types.Integer_64 (Right);
+   end ">";
+
+   ----------
+   -- ">=" --
+   ----------
+
+   overriding function ">=" (Left, Right : Monotonic_Time) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) >= A0B.Types.Integer_64 (Right);
+   end ">=";
 
    -----------
    -- Hours --
@@ -120,5 +151,24 @@ package body A0B.Time is
    begin
       return Time_Span (A0B.Types.Unsigned_64 (S) * Second_Ticks);
    end Seconds;
+
+   -----------------------
+   -- To_Monotonic_Time --
+   -----------------------
+
+   function To_Monotonic_Time
+     (NS : A0B.Types.Integer_64) return Monotonic_Time is
+   begin
+      return Monotonic_Time (NS);
+   end To_Monotonic_Time;
+
+   --------------------
+   -- To_Nanoseconds --
+   --------------------
+
+   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Integer_64 is
+   begin
+      return A0B.Types.Integer_64 (T);
+   end To_Nanoseconds;
 
 end A0B.Time;
