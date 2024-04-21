@@ -5,7 +5,7 @@
 --
 
 with "a0b_common";
-with "a0b_base";
+with "a0b_time_platform";
 
 project A0B_Time is
 
