@@ -8,4 +8,5 @@
 
 pragma Restrictions (No_Elaboration_Code);
 
-function A0B.Time.Clock return A0B.Time.Monotonic_Time with Inline_Always;
+function A0B.Time.Clock return A0B.Time.Monotonic_Time
+  with Preelaborate, Inline_Always;
