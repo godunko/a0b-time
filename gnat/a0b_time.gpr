@@ -14,6 +14,7 @@ project A0B_Time is
 
    package Compiler is
       for Switches ("Ada") use A0B_Common.Compiler_Switches_Ada;
+      for Switches ("a-reatim.adb") use A0B_Common.Compiler_Switches_Ada & "-gnatg";
    end Compiler;
 
 end A0B_Time;
