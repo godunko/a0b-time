@@ -4,7 +4,7 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
---  Real time and calendar utilities.
+--  Real time utilities.
 
 pragma Restrictions (No_Elaboration_Code);
 
@@ -14,7 +14,7 @@ package A0B.Time
   with Pure
 is
 
-   type Duration is delta 0.000_000_001 digits 18;
+   type Duration is delta 0.000_000_001 digits 18 with Size => 64;
 
    type Monotonic_Time is private;
 
@@ -57,8 +57,8 @@ is
    --   function ">" (Left, Right : Time_Span) return Boolean;
    --   function ">="(Left, Right : Time_Span) return Boolean;
 
-   --   function To_Duration (TS : Time_Span) return Duration;
-   --   function To_Time_Span (D : Duration) return Time_Span;
+   --  function To_Duration (TS : Time_Span) return Duration;
+   function To_Time_Span (D : Duration) return Time_Span;
 
    function Nanoseconds  (NS : Integer) return Time_Span
      with Inline;
@@ -79,16 +79,22 @@ is
    --   TS : out Time_Span);
    --   function Time_Of(SC : Seconds_Count; TS : Time_Span) return Time;
 
-   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Integer_64
-     with Inline_Always;
-   function To_Monotonic_Time (NS : A0B.Types.Integer_64) return Monotonic_Time
-     with Inline_Always;
+--   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Integer_64
+--     with Inline_Always;
+   function To_Monotonic_Time
+     (NS : A0B.Types.Unsigned_64) return Monotonic_Time
+        with Inline_Always;
+
+--   function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64
+--     with Inline_Always;
+--   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span
+--     with Inline_Always;
 
 private
 
    --  Monotonic_Time and Time_Span is a number of nanoseconds.
 
-   type Monotonic_Time is new A0B.Types.Integer_64;
+   type Monotonic_Time is new A0B.Types.Unsigned_64;
 
    type Time_Span is new A0B.Types.Integer_64;
 
