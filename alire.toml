@@ -15,3 +15,4 @@ disabled = true
 
 [[depends-on]]
 a0b_base = ">=0.3.0"
+a0b_time_platform = "*"
