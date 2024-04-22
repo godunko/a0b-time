@@ -16,9 +16,9 @@ is
 
    type Duration is delta 0.000_000_001 digits 18 with Size => 64;
 
-   type Monotonic_Time is private;
+   type Monotonic_Time is private with Preelaborable_Initialization;
 
-   type Time_Span is private;
+   type Time_Span is private with Preelaborable_Initialization;
 
    function "+"
      (Left : Monotonic_Time; Right : Time_Span) return Monotonic_Time
