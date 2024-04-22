@@ -79,14 +79,14 @@ is
    --   TS : out Time_Span);
    --   function Time_Of(SC : Seconds_Count; TS : Time_Span) return Time;
 
---   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Integer_64
+--   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Unsigned_64
 --     with Inline_Always;
    function To_Monotonic_Time
      (NS : A0B.Types.Unsigned_64) return Monotonic_Time
         with Inline_Always;
 
---   function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64
---     with Inline_Always;
+   function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64
+     with Inline_Always;
 --   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span
 --     with Inline_Always;
 
