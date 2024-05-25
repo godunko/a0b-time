@@ -57,7 +57,7 @@ is
    --   function ">" (Left, Right : Time_Span) return Boolean;
    --   function ">="(Left, Right : Time_Span) return Boolean;
 
-   --  function To_Duration (TS : Time_Span) return Duration;
+   function To_Duration (TS : Time_Span) return Duration;
    function To_Time_Span (D : Duration) return Time_Span;
 
    function Nanoseconds  (NS : Integer) return Time_Span

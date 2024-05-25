@@ -154,6 +154,18 @@ package body A0B.Time is
       return Time_Span (A0B.Types.Unsigned_64 (S) * Second_Ticks);
    end Seconds;
 
+   -----------------
+   -- To_Duration --
+   -----------------
+
+   function To_Duration (TS : Time_Span) return Duration is
+      function Convert is
+        new Ada.Unchecked_Conversion (Time_Span, Duration);
+
+   begin
+      return Convert (TS);
+   end To_Duration;
+
    -----------------------
    -- To_Monotonic_Time --
    -----------------------
