@@ -77,6 +77,15 @@ package body A0B.Time is
       return A0B.Types.Unsigned_64 (Left) < A0B.Types.Unsigned_64 (Right);
    end "<";
 
+   ---------
+   -- "<" --
+   ---------
+
+   overriding function "<" (Left, Right : Time_Span) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) < A0B.Types.Integer_64 (Right);
+   end "<";
+
    ----------
    -- "<=" --
    ----------
@@ -84,6 +93,15 @@ package body A0B.Time is
    overriding function "<=" (Left, Right : Monotonic_Time) return Boolean is
    begin
       return A0B.Types.Unsigned_64 (Left) <= A0B.Types.Unsigned_64 (Right);
+   end "<=";
+
+   ----------
+   -- "<=" --
+   ----------
+
+   overriding function "<=" (Left, Right : Time_Span) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) <= A0B.Types.Integer_64 (Right);
    end "<=";
 
    ---------
@@ -95,6 +113,15 @@ package body A0B.Time is
       return A0B.Types.Unsigned_64 (Left) > A0B.Types.Unsigned_64 (Right);
    end ">";
 
+   ---------
+   -- ">" --
+   ---------
+
+   overriding function ">" (Left, Right : Time_Span) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) > A0B.Types.Integer_64 (Right);
+   end ">";
+
    ----------
    -- ">=" --
    ----------
@@ -102,6 +129,15 @@ package body A0B.Time is
    overriding function ">=" (Left, Right : Monotonic_Time) return Boolean is
    begin
       return A0B.Types.Unsigned_64 (Left) >= A0B.Types.Unsigned_64 (Right);
+   end ">=";
+
+   ----------
+   -- ">=" --
+   ----------
+
+   overriding function ">=" (Left, Right : Time_Span) return Boolean is
+   begin
+      return A0B.Types.Integer_64 (Left) >= A0B.Types.Integer_64 (Right);
    end ">=";
 
    -----------

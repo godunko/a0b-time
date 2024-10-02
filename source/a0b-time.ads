@@ -52,10 +52,10 @@ is
 
    --   function "abs"(Right : Time_Span) return Time_Span;
 
-   --   function "<" (Left, Right : Time_Span) return Boolean;
-   --   function "<="(Left, Right : Time_Span) return Boolean;
-   --   function ">" (Left, Right : Time_Span) return Boolean;
-   --   function ">="(Left, Right : Time_Span) return Boolean;
+   function "<" (Left, Right : Time_Span) return Boolean with Inline_Always;
+   function "<=" (Left, Right : Time_Span) return Boolean with Inline_Always;
+   function ">" (Left, Right : Time_Span) return Boolean with Inline_Always;
+   function ">=" (Left, Right : Time_Span) return Boolean with Inline_Always;
 
    function To_Duration (TS : Time_Span) return Duration;
    function To_Time_Span (D : Duration) return Time_Span;
