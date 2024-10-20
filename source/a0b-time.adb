@@ -216,9 +216,9 @@ package body A0B.Time is
    -- To_Nanoseconds --
    --------------------
 
-   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Integer_64 is
+   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Unsigned_64 is
    begin
-      return A0B.Types.Integer_64 (T);
+      return A0B.Types.Unsigned_64 (T);
    end To_Nanoseconds;
 
    --------------------
