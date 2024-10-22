@@ -1,0 +1,27 @@
+name = "a0b_time_selftest"
+description = "A0B Time sefltest"
+version = "0.1.0-dev"
+
+authors = ["Vadim Godunko"]
+maintainers = ["Vadim Godunko <vgodunko@gmail.com>"]
+maintainers-logins = ["godunko"]
+licenses = "Apache-2.0 WITH LLVM-exception"
+
+project-files = ["a0b_time_selftest.gpr"]
+
+[configuration]
+generate_ada = false
+generate_c = false
+generate_gpr = true
+
+[configuration.values]
+a0b_armv7m.fpu_extension = "none"
+# Cortex-M3 used for testing doesn't support FPU.
+
+[[depends-on]]
+a0b_armv7m_systick_clock_timer = "*"
+a0b_time = "*"
+a0b_timer = "*"
+
+[[pins]]
+a0b_time = { path='..' }
