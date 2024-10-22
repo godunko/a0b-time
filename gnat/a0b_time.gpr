@@ -14,7 +14,10 @@ project A0B_Time is
 
    package Compiler is
       for Switches ("Ada") use A0B_Common.Compiler_Switches_Ada;
-      for Switches ("a-reatim.adb") use A0B_Common.Compiler_Switches_Ada & "-gnatg";
+      for Switches ("a-reatim.adb") use
+        A0B_Common.Compiler_Switches_Ada
+          & ("-gnatg",     --  GNAT implementation mode (used for compiling GNAT units)
+             "-gnaty-d");  --  check no DOS line terminators [disabled]
    end Compiler;
 
 end A0B_Time;
