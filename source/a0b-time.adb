@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2024, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2024-2025, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -67,6 +67,16 @@ package body A0B.Time is
         Time_Span
           (A0B.Types.Integer_64 (Left) - A0B.Types.Integer_64 (Right));
    end "-";
+
+   ---------
+   -- "/" --
+   ---------
+
+   function "/" (Left, Right : Time_Span) return Integer is
+   begin
+      return
+        Integer (A0B.Types.Integer_64 (Left) / A0B.Types.Integer_64 (Right));
+   end "/";
 
    ---------
    -- "<" --

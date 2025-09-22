@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2024, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2024-2025, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -47,7 +47,7 @@ is
    --   function "-" (Right : Time_Span) return Time_Span;
    --   function "*" (Left : Time_Span; Right : Integer) return Time_Span;
    --   function "*" (Left : Integer; Right : Time_Span) return Time_Span;
-   --   function "/" (Left, Right : Time_Span) return Integer;
+   function "/" (Left, Right : Time_Span) return Integer with Inline_Always;
    --   function "/" (Left : Time_Span; Right : Integer) return Time_Span;
 
    --   function "abs"(Right : Time_Span) return Time_Span;
