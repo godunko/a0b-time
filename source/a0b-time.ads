@@ -87,8 +87,8 @@ is
 
    function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64
      with Inline_Always;
---   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span
---     with Inline_Always;
+   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span
+     with Inline_Always;
 
 private
 
