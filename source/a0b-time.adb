@@ -169,7 +169,7 @@ package body A0B.Time is
 
    function Hours (H : Integer) return Time_Span is
    begin
-      return Time_Span (A0B.Types.Unsigned_64 (H) * Hour_Ticks);
+      return Time_Span (A0B.Types.Integer_64 (H) * Hour_Ticks);
    end Hours;
 
    ------------------
@@ -178,7 +178,7 @@ package body A0B.Time is
 
    function Microseconds (US : Integer) return Time_Span is
    begin
-      return Time_Span (A0B.Types.Unsigned_64 (US) * Microsecond_Ticks);
+      return Time_Span (A0B.Types.Integer_64 (US) * Microsecond_Ticks);
    end Microseconds;
 
    ------------------
@@ -187,12 +187,16 @@ package body A0B.Time is
 
    function Milliseconds (MS : Integer) return Time_Span is
    begin
-      return Time_Span (A0B.Types.Unsigned_64 (MS) * Millisecond_Ticks);
+      return Time_Span (A0B.Types.Integer_64 (MS) * Millisecond_Ticks);
    end Milliseconds;
+
+   -------------
+   -- Minutes --
+   -------------
 
    function Minutes (M : Integer) return Time_Span is
    begin
-      return Time_Span (A0B.Types.Unsigned_64 (M) * Minute_Ticks);
+      return Time_Span (A0B.Types.Integer_64 (M) * Minute_Ticks);
    end Minutes;
 
    -----------------
@@ -201,7 +205,7 @@ package body A0B.Time is
 
    function Nanoseconds (NS : Integer) return Time_Span is
    begin
-      return Time_Span (A0B.Types.Unsigned_64 (NS) * Nanosecond_Ticks);
+      return Time_Span (A0B.Types.Integer_64 (NS) * Nanosecond_Ticks);
    end Nanoseconds;
 
    -------------
@@ -210,7 +214,7 @@ package body A0B.Time is
 
    function Seconds (S : Integer) return Time_Span is
    begin
-      return Time_Span (A0B.Types.Unsigned_64 (S) * Second_Ticks);
+      return Time_Span (A0B.Types.Integer_64 (S) * Second_Ticks);
    end Seconds;
 
    -----------------
