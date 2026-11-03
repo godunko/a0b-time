@@ -14,7 +14,7 @@ generate_gpr = true
 generate_c = false
 
 [[depends-on]]
-a0b_base = "*"
+a0b_base = "^0.6.0"
 a0b_time_platform = "0.1.0"
 
 [[actions]]
