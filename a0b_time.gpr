@@ -1,0 +1,30 @@
+--
+--  Copyright (C) 2024-2026, Vadim Godunko <vgodunko@gmail.com>
+--
+--  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+--
+
+with "a0b_common.gpr";
+
+with "config/a0b_time_config.gpr";
+
+with "a0b_time_platform.gpr";
+
+project A0B_Time is
+
+   for Object_Dir use ".objs/" & A0B_Common.Object_Dir_Suffix;
+
+   for Source_Dirs use ("source");
+
+   package Compiler is
+      for Switches ("Ada") use
+        A0B_Time_Config.Ada_Compiler_Switches
+          & A0B_Common.Compiler_Switches_Ada;
+      for Switches ("a-reatim.adb") use
+        A0B_Time_Config.Ada_Compiler_Switches
+          & A0B_Common.Compiler_Switches_Ada
+          & ("-gnatg",     --  GNAT implementation mode (used for compiling GNAT units)
+             "-gnaty-d");  --  check no DOS line terminators [disabled]
+   end Compiler;
+
+end A0B_Time;
