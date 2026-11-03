@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2024-2025, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2024-2026, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -19,6 +19,19 @@ package body A0B.Time is
    Second_Ticks      : constant := 1_000_000_000;
    Minute_Ticks      : constant := 60_000_000_000;
    Hour_Ticks        : constant := 3_600_000_000_000;
+
+   ---------
+   -- "+" --
+   ---------
+
+   function "+"
+     (Left : Monotonic_Time; Right : Duration) return Monotonic_Time is
+   begin
+      return
+        Monotonic_Time
+          (A0B.Types.Integer_64 (Left)
+             + A0B.Types.Integer_64 (To_Time_Span (Right)));
+   end "+";
 
    ---------
    -- "+" --

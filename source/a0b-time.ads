@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2024-2025, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2024-2026, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -22,6 +22,9 @@ is
 
    function "+"
      (Left : Monotonic_Time; Right : Time_Span) return Monotonic_Time
+        with Inline_Always;
+   function "+"
+     (Left : Monotonic_Time; Right : Duration) return Monotonic_Time
         with Inline_Always;
    function "+"
      (Left : Time_Span; Right : Monotonic_Time) return Monotonic_Time
