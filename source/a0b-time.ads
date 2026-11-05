@@ -88,10 +88,8 @@ is
      (NS : A0B.Types.Unsigned_64) return Monotonic_Time
         with Inline_Always;
 
-   function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64
-     with Inline_Always;
-   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span
-     with Inline_Always;
+   function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64;
+   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span;
 
 private
 
@@ -99,14 +97,14 @@ private
 
    subtype Integer_64 is A0B.Types.Integer_64;
 
-   --  Monotonic_Time and Time_Span is a number of nanoseconds.
+   --  `Monotonic_Time` and `Time_Span` store counts of `Time_Unit` ticks.
 
    type Monotonic_Time is
      new A0B.Types.Integer_64 range 0 .. A0B.Types.Integer_64'Last;
 
    type Time_Span is new A0B.Types.Integer_64;
 
-   --  Duration and Time_Span use the same signed nanosecond count.
+   --  `Duration` and `Time_Span` use the same signed count of `Time_Unit` ticks.
    --  Keep these assumptions checked for the unchecked conversions.
 
    pragma Compile_Time_Error
@@ -115,8 +113,8 @@ private
       "Duration and Time_Span must have matching 64-bit representations");
 
    pragma Compile_Time_Error
-     (Duration'Small /= 0.000_000_001,
-      "Duration must use nanosecond ticks");
+     (Duration'Small /= Time_Unit,
+      "Duration must use Time_Unit ticks");
 
    pragma Compile_Time_Error
      (Duration'First /= Time_Span'Pos (Time_Span'First) * Duration'Small
@@ -134,6 +132,10 @@ private
    Second_Ticks      : constant := Integer_64 (1.0 / Time_Unit);
    Minute_Ticks      : constant := Integer_64 (60.0 / Time_Unit);
    Hour_Ticks        : constant := Integer_64 (3_600.0 / Time_Unit);
+   pragma Compile_Time_Error
+     (Nanosecond_Ticks <= 0
+        or else Nanosecond_Ticks * Time_Unit /= 0.000_000_001,
+      "One nanosecond must contain a whole number of ticks");
 
    function "+"
      (Left : Monotonic_Time; Right : Duration) return Monotonic_Time
@@ -195,12 +197,12 @@ private
      renames Unchecked_To_Duration;
 
    function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64
-   is (Integer_64 (T));
+   is (Integer_64 (T) / Nanosecond_Ticks);
 
    function To_Time_Span (D : Duration) return Time_Span
      renames Unchecked_To_Time_Span;
 
    function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span
-   is (Time_Span (NS));
+   is (Time_Span (NS * Nanosecond_Ticks));
 
 end A0B.Time;
