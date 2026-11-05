@@ -103,6 +103,23 @@ private
 
    type Time_Span is new A0B.Types.Integer_64;
 
+   --  Duration and Time_Span use the same signed nanosecond count.
+   --  Keep these assumptions checked for the unchecked conversions.
+
+   pragma Compile_Time_Error
+     (Duration'Size /= 64
+        or else Time_Span'Size /= Duration'Size,
+      "Duration and Time_Span must have matching 64-bit representations");
+
+   pragma Compile_Time_Error
+     (Duration'Small /= 0.000_000_001,
+      "Duration must use nanosecond ticks");
+
+   pragma Compile_Time_Error
+     (Duration'First /= Time_Span'Pos (Time_Span'First) * Duration'Small
+        or else Duration'Last /= Time_Span'Pos (Time_Span'Last) * Duration'Small,
+      "Duration and Time_Span must have matching tick ranges");
+
    Nanosecond_Ticks  : constant := Integer_64 (0.000_000_001 / Time_Unit);
    Microsecond_Ticks : constant := Integer_64 (0.000_001 / Time_Unit);
    Millisecond_Ticks : constant := Integer_64 (0.001 / Time_Unit);
