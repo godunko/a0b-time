@@ -10,13 +10,8 @@ with Ada.Unchecked_Conversion;
 
 package body A0B.Time is
 
-   use type A0B.Types.Integer_64;
    use type A0B.Types.Unsigned_64;
 
-   Nanosecond_Ticks  : constant := 1;
-   Microsecond_Ticks : constant := 1_000;
-   Millisecond_Ticks : constant := 1_000_000;
-   Second_Ticks      : constant := 1_000_000_000;
    Minute_Ticks      : constant := 60_000_000_000;
    Hour_Ticks        : constant := 3_600_000_000_000;
 
@@ -172,24 +167,6 @@ package body A0B.Time is
       return Time_Span (A0B.Types.Integer_64 (H) * Hour_Ticks);
    end Hours;
 
-   ------------------
-   -- Microseconds --
-   ------------------
-
-   function Microseconds (US : Integer) return Time_Span is
-   begin
-      return Time_Span (A0B.Types.Integer_64 (US) * Microsecond_Ticks);
-   end Microseconds;
-
-   ------------------
-   -- Milliseconds --
-   ------------------
-
-   function Milliseconds (MS : Integer) return Time_Span is
-   begin
-      return Time_Span (A0B.Types.Integer_64 (MS) * Millisecond_Ticks);
-   end Milliseconds;
-
    -------------
    -- Minutes --
    -------------
@@ -198,24 +175,6 @@ package body A0B.Time is
    begin
       return Time_Span (A0B.Types.Integer_64 (M) * Minute_Ticks);
    end Minutes;
-
-   -----------------
-   -- Nanoseconds --
-   -----------------
-
-   function Nanoseconds (NS : Integer) return Time_Span is
-   begin
-      return Time_Span (A0B.Types.Integer_64 (NS) * Nanosecond_Ticks);
-   end Nanoseconds;
-
-   -------------
-   -- Seconds --
-   -------------
-
-   function Seconds (S : Integer) return Time_Span is
-   begin
-      return Time_Span (A0B.Types.Integer_64 (S) * Second_Ticks);
-   end Seconds;
 
    -----------------
    -- To_Duration --

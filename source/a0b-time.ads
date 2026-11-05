@@ -63,14 +63,10 @@ is
    function To_Duration (TS : Time_Span) return Duration;
    function To_Time_Span (D : Duration) return Time_Span;
 
-   function Nanoseconds  (NS : Integer) return Time_Span
-     with Inline;
-   function Microseconds (US : Integer) return Time_Span
-     with Inline;
-   function Milliseconds (MS : Integer) return Time_Span
-     with Inline;
-   function Seconds      (S  : Integer) return Time_Span
-     with Inline;
+   function Nanoseconds  (NS : Integer) return Time_Span;
+   function Microseconds (US : Integer) return Time_Span;
+   function Milliseconds (MS : Integer) return Time_Span;
+   function Seconds      (S  : Integer) return Time_Span;
    function Minutes      (M  : Integer) return Time_Span
      with Inline;
    function Hours        (H  : Integer) return Time_Span
@@ -95,10 +91,29 @@ is
 
 private
 
+   use type A0B.Types.Integer_64;
+
    --  Monotonic_Time and Time_Span is a number of nanoseconds.
 
    type Monotonic_Time is new A0B.Types.Unsigned_64;
 
    type Time_Span is new A0B.Types.Integer_64;
+
+   Nanosecond_Ticks  : constant := 1;
+   Microsecond_Ticks : constant := 1_000;
+   Millisecond_Ticks : constant := 1_000_000;
+   Second_Ticks      : constant := 1_000_000_000;
+
+   function Microseconds (US : Integer) return Time_Span is
+     (Time_Span (A0B.Types.Integer_64 (US) * Microsecond_Ticks));
+
+   function Milliseconds (MS : Integer) return Time_Span is
+     (Time_Span (A0B.Types.Integer_64 (MS) * Millisecond_Ticks));
+
+   function Nanoseconds (NS : Integer) return Time_Span is
+     (Time_Span (A0B.Types.Integer_64 (NS) * Nanosecond_Ticks));
+
+   function Seconds (S : Integer) return Time_Span is
+     (Time_Span (A0B.Types.Integer_64 (S) * Second_Ticks));
 
 end A0B.Time;
