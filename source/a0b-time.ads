@@ -36,14 +36,10 @@ is
      (Left : Monotonic_Time; Right : Monotonic_Time) return Time_Span
         with Inline_Always;
 
-   function "<" (Left, Right : Monotonic_Time) return Boolean
-     with Inline_Always;
-   function "<=" (Left, Right : Monotonic_Time) return Boolean
-     with Inline_Always;
-   function ">" (Left, Right : Monotonic_Time) return Boolean
-     with Inline_Always;
-   function ">=" (Left, Right : Monotonic_Time) return Boolean
-     with Inline_Always;
+   function "<" (Left, Right : Monotonic_Time) return Boolean;
+   function "<=" (Left, Right : Monotonic_Time) return Boolean;
+   function ">" (Left, Right : Monotonic_Time) return Boolean;
+   function ">=" (Left, Right : Monotonic_Time) return Boolean;
 
    --   function "+" (Left, Right : Time_Span) return Time_Span;
    --   function "-" (Left, Right : Time_Span) return Time_Span;
@@ -55,10 +51,10 @@ is
 
    --   function "abs"(Right : Time_Span) return Time_Span;
 
-   function "<" (Left, Right : Time_Span) return Boolean with Inline_Always;
-   function "<=" (Left, Right : Time_Span) return Boolean with Inline_Always;
-   function ">" (Left, Right : Time_Span) return Boolean with Inline_Always;
-   function ">=" (Left, Right : Time_Span) return Boolean with Inline_Always;
+   function "<" (Left, Right : Time_Span) return Boolean;
+   function "<=" (Left, Right : Time_Span) return Boolean;
+   function ">" (Left, Right : Time_Span) return Boolean;
+   function ">=" (Left, Right : Time_Span) return Boolean;
 
    function To_Duration (TS : Time_Span) return Duration;
    function To_Time_Span (D : Duration) return Time_Span;
@@ -92,6 +88,7 @@ is
 private
 
    use type A0B.Types.Integer_64;
+   use type A0B.Types.Unsigned_64;
 
    --  Monotonic_Time and Time_Span is a number of nanoseconds.
 
@@ -103,6 +100,30 @@ private
    Microsecond_Ticks : constant := 1_000;
    Millisecond_Ticks : constant := 1_000_000;
    Second_Ticks      : constant := 1_000_000_000;
+
+   overriding function "<" (Left, Right : Monotonic_Time) return Boolean is
+     (A0B.Types.Unsigned_64 (Left) < A0B.Types.Unsigned_64 (Right));
+
+   overriding function "<" (Left, Right : Time_Span) return Boolean is
+     (A0B.Types.Integer_64 (Left) < A0B.Types.Integer_64 (Right));
+
+   overriding function "<=" (Left, Right : Monotonic_Time) return Boolean is
+     (A0B.Types.Unsigned_64 (Left) <= A0B.Types.Unsigned_64 (Right));
+
+   overriding function "<=" (Left, Right : Time_Span) return Boolean is
+     (A0B.Types.Integer_64 (Left) <= A0B.Types.Integer_64 (Right));
+
+   overriding function ">" (Left, Right : Monotonic_Time) return Boolean is
+     (A0B.Types.Unsigned_64 (Left) > A0B.Types.Unsigned_64 (Right));
+
+   overriding function ">" (Left, Right : Time_Span) return Boolean is
+     (A0B.Types.Integer_64 (Left) > A0B.Types.Integer_64 (Right));
+
+   overriding function ">=" (Left, Right : Monotonic_Time) return Boolean is
+     (A0B.Types.Unsigned_64 (Left) >= A0B.Types.Unsigned_64 (Right));
+
+   overriding function ">=" (Left, Right : Time_Span) return Boolean is
+     (A0B.Types.Integer_64 (Left) >= A0B.Types.Integer_64 (Right));
 
    function Microseconds (US : Integer) return Time_Span is
      (Time_Span (A0B.Types.Integer_64 (US) * Microsecond_Ticks));

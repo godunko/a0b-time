@@ -10,8 +10,6 @@ with Ada.Unchecked_Conversion;
 
 package body A0B.Time is
 
-   use type A0B.Types.Unsigned_64;
-
    Minute_Ticks      : constant := 60_000_000_000;
    Hour_Ticks        : constant := 3_600_000_000_000;
 
@@ -85,78 +83,6 @@ package body A0B.Time is
       return
         Integer (A0B.Types.Integer_64 (Left) / A0B.Types.Integer_64 (Right));
    end "/";
-
-   ---------
-   -- "<" --
-   ---------
-
-   overriding function "<" (Left, Right : Monotonic_Time) return Boolean is
-   begin
-      return A0B.Types.Unsigned_64 (Left) < A0B.Types.Unsigned_64 (Right);
-   end "<";
-
-   ---------
-   -- "<" --
-   ---------
-
-   overriding function "<" (Left, Right : Time_Span) return Boolean is
-   begin
-      return A0B.Types.Integer_64 (Left) < A0B.Types.Integer_64 (Right);
-   end "<";
-
-   ----------
-   -- "<=" --
-   ----------
-
-   overriding function "<=" (Left, Right : Monotonic_Time) return Boolean is
-   begin
-      return A0B.Types.Unsigned_64 (Left) <= A0B.Types.Unsigned_64 (Right);
-   end "<=";
-
-   ----------
-   -- "<=" --
-   ----------
-
-   overriding function "<=" (Left, Right : Time_Span) return Boolean is
-   begin
-      return A0B.Types.Integer_64 (Left) <= A0B.Types.Integer_64 (Right);
-   end "<=";
-
-   ---------
-   -- ">" --
-   ---------
-
-   overriding function ">" (Left, Right : Monotonic_Time) return Boolean is
-   begin
-      return A0B.Types.Unsigned_64 (Left) > A0B.Types.Unsigned_64 (Right);
-   end ">";
-
-   ---------
-   -- ">" --
-   ---------
-
-   overriding function ">" (Left, Right : Time_Span) return Boolean is
-   begin
-      return A0B.Types.Integer_64 (Left) > A0B.Types.Integer_64 (Right);
-   end ">";
-
-   ----------
-   -- ">=" --
-   ----------
-
-   overriding function ">=" (Left, Right : Monotonic_Time) return Boolean is
-   begin
-      return A0B.Types.Unsigned_64 (Left) >= A0B.Types.Unsigned_64 (Right);
-   end ">=";
-
-   ----------
-   -- ">=" --
-   ----------
-
-   overriding function ">=" (Left, Right : Time_Span) return Boolean is
-   begin
-      return A0B.Types.Integer_64 (Left) >= A0B.Types.Integer_64 (Right);
-   end ">=";
 
    -----------
    -- Hours --
