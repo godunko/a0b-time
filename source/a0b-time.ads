@@ -4,7 +4,14 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
---  Real time utilities.
+--  Types and operations for monotonic time and time spans with nanosecond
+--  resolution.
+--
+--  This package defines monotonic time instants, signed time spans, and a
+--  fixed-point duration type. It provides arithmetic and comparison operations,
+--  conversions between time spans and durations, and conversions to and from
+--  integer nanosecond counts. Time spans can also be constructed from integer
+--  counts of units ranging from nanoseconds to hours.
 
 pragma Restrictions (No_Elaboration_Code);
 
