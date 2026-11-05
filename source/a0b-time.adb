@@ -6,70 +6,7 @@
 
 pragma Restrictions (No_Elaboration_Code);
 
-with Ada.Unchecked_Conversion;
-
 package body A0B.Time is
-
-   ---------
-   -- "+" --
-   ---------
-
-   function "+"
-     (Left : Monotonic_Time; Right : Duration) return Monotonic_Time is
-   begin
-      return
-        Monotonic_Time
-          (A0B.Types.Integer_64 (Left)
-             + A0B.Types.Integer_64 (To_Time_Span (Right)));
-   end "+";
-
-   ---------
-   -- "+" --
-   ---------
-
-   function "+"
-     (Left : Monotonic_Time; Right : Time_Span) return Monotonic_Time is
-   begin
-      return
-        Monotonic_Time
-          (A0B.Types.Integer_64 (Left) + A0B.Types.Integer_64 (Right));
-   end "+";
-
-   ---------
-   -- "+" --
-   ---------
-
-   function "+"
-     (Left : Time_Span; Right : Monotonic_Time) return Monotonic_Time is
-   begin
-      return
-        Monotonic_Time
-          (A0B.Types.Integer_64 (Left) + A0B.Types.Integer_64 (Right));
-   end "+";
-
-   ---------
-   -- "-" --
-   ---------
-
-   function "-"
-     (Left : Monotonic_Time; Right : Time_Span) return Monotonic_Time is
-   begin
-      return
-        Monotonic_Time
-          (A0B.Types.Integer_64 (Left) - A0B.Types.Integer_64 (Right));
-   end "-";
-
-   ---------
-   -- "-" --
-   ---------
-
-   function "-"
-     (Left : Monotonic_Time; Right : Monotonic_Time) return Time_Span is
-   begin
-      return
-        Time_Span
-          (A0B.Types.Integer_64 (Left) - A0B.Types.Integer_64 (Right));
-   end "-";
 
    ---------
    -- "/" --
@@ -99,18 +36,6 @@ package body A0B.Time is
       return Time_Span (A0B.Types.Integer_64 (M) * Minute_Ticks);
    end Minutes;
 
-   -----------------
-   -- To_Duration --
-   -----------------
-
-   function To_Duration (TS : Time_Span) return Duration is
-      function Convert is
-        new Ada.Unchecked_Conversion (Time_Span, Duration);
-
-   begin
-      return Convert (TS);
-   end To_Duration;
-
    -----------------------
    -- To_Monotonic_Time --
    -----------------------
@@ -129,35 +54,5 @@ package body A0B.Time is
    begin
       return A0B.Types.Unsigned_64 (T);
    end To_Nanoseconds;
-
-   --------------------
-   -- To_Nanoseconds --
-   --------------------
-
-   function To_Nanoseconds (T : Time_Span) return A0B.Types.Integer_64 is
-   begin
-      return A0B.Types.Integer_64 (T);
-   end To_Nanoseconds;
-
-   ------------------
-   -- To_Time_Span --
-   ------------------
-
-   function To_Time_Span (D : Duration) return Time_Span is
-      function Convert is
-        new Ada.Unchecked_Conversion (Duration, Time_Span);
-
-   begin
-      return Convert (D);
-   end To_Time_Span;
-
-   ------------------
-   -- To_Time_Span --
-   ------------------
-
-   function To_Time_Span (NS : A0B.Types.Integer_64) return Time_Span is
-   begin
-      return Time_Span (NS);
-   end To_Time_Span;
 
 end A0B.Time;
