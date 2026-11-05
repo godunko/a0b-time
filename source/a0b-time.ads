@@ -14,7 +14,12 @@ package A0B.Time
   with Pure
 is
 
-   type Duration is delta 0.000_000_001 digits 18 with Size => 64;
+   Time_Unit : constant := 0.000_000_001;
+
+   type Duration is
+     delta Time_Unit
+     range -(2 ** 63) * Time_Unit .. (2 ** 63 - 1) * Time_Unit
+     with Small => Time_Unit, Size => 64;
 
    type Monotonic_Time is private with Preelaborable_Initialization;
 
@@ -90,16 +95,20 @@ private
    use type A0B.Types.Integer_64;
    use type A0B.Types.Unsigned_64;
 
+   subtype Integer_64 is A0B.Types.Integer_64;
+
    --  Monotonic_Time and Time_Span is a number of nanoseconds.
 
    type Monotonic_Time is new A0B.Types.Unsigned_64;
 
    type Time_Span is new A0B.Types.Integer_64;
 
-   Nanosecond_Ticks  : constant := 1;
-   Microsecond_Ticks : constant := 1_000;
-   Millisecond_Ticks : constant := 1_000_000;
-   Second_Ticks      : constant := 1_000_000_000;
+   Nanosecond_Ticks  : constant := Integer_64 (0.000_000_001 / Time_Unit);
+   Microsecond_Ticks : constant := Integer_64 (0.000_001 / Time_Unit);
+   Millisecond_Ticks : constant := Integer_64 (0.001 / Time_Unit);
+   Second_Ticks      : constant := Integer_64 (1.0 / Time_Unit);
+   Minute_Ticks      : constant := Integer_64 (60.0 / Time_Unit);
+   Hour_Ticks        : constant := Integer_64 (3_600.0 / Time_Unit);
 
    overriding function "<" (Left, Right : Monotonic_Time) return Boolean is
      (A0B.Types.Unsigned_64 (Left) < A0B.Types.Unsigned_64 (Right));

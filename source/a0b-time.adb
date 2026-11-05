@@ -10,9 +10,6 @@ with Ada.Unchecked_Conversion;
 
 package body A0B.Time is
 
-   Minute_Ticks      : constant := 60_000_000_000;
-   Hour_Ticks        : constant := 3_600_000_000_000;
-
    ---------
    -- "+" --
    ---------
