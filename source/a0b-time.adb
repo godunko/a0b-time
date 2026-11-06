@@ -36,23 +36,4 @@ package body A0B.Time is
       return Time_Span (A0B.Types.Integer_64 (M) * Minute_Ticks);
    end Minutes;
 
-   -----------------------
-   -- To_Monotonic_Time --
-   -----------------------
-
-   function To_Monotonic_Time
-     (NS : A0B.Types.Unsigned_64) return Monotonic_Time is
-   begin
-      return Monotonic_Time (Integer_64 (NS) * Nanosecond_Ticks);
-   end To_Monotonic_Time;
-
-   --------------------
-   -- To_Nanoseconds --
-   --------------------
-
-   function To_Nanoseconds (T : Monotonic_Time) return A0B.Types.Unsigned_64 is
-   begin
-      return A0B.Types.Unsigned_64 (Integer_64 (T) / Nanosecond_Ticks);
-   end To_Nanoseconds;
-
 end A0B.Time;
